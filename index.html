@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Images</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .user-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    padding: 20px;
+  }
+
+  .user-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10%;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .user-image:hover {
+    transform: scale(1.05);
+  }
+
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: underline;
+  }
+
+  .user-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .user-card:hover .user-name {
+    color: skyblue; 
+  }
+
+  .btn-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+<h1 class="heading">Select Images</h1>
+<div class="btn-container">
+  <button class="btn" onclick="loadImagesFromAPI()">Load Images from API</button>
+  <button class="btn" onclick="loadImagesFromJSON()">Load Images from JSON</button>
+</div>
+<div class="container" id="image-container"></div>
+
+<script>
+  // Function to load images from API
+  function loadImagesFromAPI() {
+    const container = document.getElementById("image-container");
+    container.innerHTML = ""; // Clear previous images
+
+    fetch('https://api.slingacademy.com/v1/sample-data/photos?offset=25&limit=55')
+      .then(response => response.json())
+      .then(data => {
+        if (data.photos && Array.isArray(data.photos)) {
+          data.photos.forEach(photo => {
+            createImageElement(container, photo.url, photo.title);
+          });
+        } else {
+          console.error('Error fetching images from API: Unexpected data format');
+        }
+      })
+      .catch(error => console.error('Error fetching images from API:', error));
+  }
+
+  // Function to load images from JSON data
+  function loadImagesFromJSON() {
+    const container = document.getElementById("image-container");
+    container.innerHTML = ""; // Clear previous images
+
+    const imageData = [
+      { "image": "https://api.slingacademy.com/public/sample-photos/6.jpeg", "title": "Apply future response she reduce decide" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/7.jpeg", "title": "Fire year candidate too like" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/8.jpeg", "title": "Reflect design camera land girl wind behind side" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/9.jpeg", "title": "Per nature research" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/10.jpeg", "title": "Yard" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/11.jpeg", "title": "Commercial kitchen" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/12.jpeg", "title": "Fact herself" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/13.jpeg", "title": "Produce science chance develop something" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/14.jpeg", "title": "Positive particular" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/15.jpeg", "title": "Again would high particularly American table" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/16.jpeg", "title": "Boy trouble offer candidate maybe mean family" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/17.jpeg", "title": "Pass effect part" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/18.jpeg", "title": "East operation young indeed draw great professor" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/19.jpeg", "title": "Style class that party see eat find" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/20.jpeg", "title": "No white success knowledge player community" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/21.jpeg", "title": "Nice write individual major conference bed class office shoulder" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/22.jpeg", "title": "Apply personal receive and" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/23.jpeg", "title": "Tax risk guess each court hand sea goal dream" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/24.jpeg", "title": "Man whom woman produce may rule his man born choose few century" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/25.jpeg", "title": "Certainly than need enjoy understand right" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/26.jpeg", "title": "Executive challenge pattern eye although" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/27.jpeg", "title": "Company heavy" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/28.jpeg", "title": "Campaign modern let civil" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/29.jpeg", "title": "Camera pressure believe employee court" },
+      { "image": "https://api.slingacademy.com/public/sample-photos/30.jpeg", "title": "Agent nearly" }
+    ];
+
+    imageData.forEach(image => {
+      createImageElement(container, image.image, image.title);
+    });
+  }
+
+  // Function to create image element and append it to the container
+  function createImageElement(container, imageUrl, imageTitle) {
+    const userCard = document.createElement("div");
+    userCard.className = "user-card";
+
+    const img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = "User Image";
+    img.className = "user-image";
+    userCard.appendChild(img);
+
+    const name = document.createElement("p");
+    name.textContent = imageTitle;
+    name.className = "user-name";
+    userCard.appendChild(name);
+
+    container.appendChild(userCard);
+  }
+</script>
+</body>
+</html>
